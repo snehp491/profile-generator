@@ -5,6 +5,9 @@ const Manager = require('./lib/Manager')
 const Engineer = require('./lib/Engineer')
 const Intern = require('./lib/Intern')
 
+// Html template
+const createCards = require('./src/template');
+
 const team = [];
 const options = ['Manager', 'Engineer', 'Intern', 'Generate Team Profiles'];
 
@@ -92,7 +95,7 @@ function addIntern() {
             response['id'],
             response['name'],
             response['email'],
-            response['github']));
+            response['school']));
 
         prompt();
     });
@@ -100,6 +103,7 @@ function addIntern() {
 
 function build() {
     console.log('build');
+    console.log(createCards(team));
 }
 
 function prompt() {

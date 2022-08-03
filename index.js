@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const fs = require('fs');
 
 // Models
 const Manager = require('./lib/Manager')
@@ -103,7 +104,7 @@ function addIntern() {
 
 function build() {
     console.log('build');
-    console.log(createCards(team));
+    fs.writeFileSync('./dist/index.html', createCards(team));
 }
 
 function prompt() {

@@ -1,21 +1,101 @@
 const inquirer = require('inquirer');
 
+// Models
+const Manager = require('./lib/Manager')
+const Engineer = require('./lib/Engineer')
+const Intern = require('./lib/Intern')
+
 const team = [];
-const options = ['Manager', 'Engineer', 'Intern'];
+const options = ['Manager', 'Engineer', 'Intern', 'Generate Team Profiles'];
 
 function addManager() {
     console.log('add manager');
-    prompt();
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'Enter the manager name'
+        }, {
+            type: 'input',
+            name: 'id',
+            message: 'Enter the managers id'
+        }, {
+            type: 'input',
+            name: 'email',
+            message: 'Enter the managers email'
+        }, {
+            type: 'input',
+            name: 'office',
+            message: 'Enter the managers office number'
+        }]).then((response) => {
+            team.push(new Manager(
+                response['id'],
+                response['name'],
+                response['email'],
+                response['office']));
+
+                prompt();
+    });
 }
 
 function addEngineer() {
     console.log('add engineer');
-    prompt();
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'Enter the engineers name'
+        }, {
+            type: 'input',
+            name: 'id',
+            message: 'Enter the engineers id'
+        }, {
+            type: 'input',
+            name: 'email',
+            message: 'Enter the engineers email'
+        }, {
+            type: 'input',
+            name: 'github',
+            message: 'Enter the engineers GitHub profile'
+        }]).then((response) => {
+        team.push(new Engineer(
+            response['id'],
+            response['name'],
+            response['email'],
+            response['github']));
+
+        prompt();
+    });
 }
 
 function addIntern() {
     console.log('add intern');
-    prompt();
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'Enter the interns name'
+        }, {
+            type: 'input',
+            name: 'id',
+            message: 'Enter the interns id'
+        }, {
+            type: 'input',
+            name: 'email',
+            message: 'Enter the interns email'
+        }, {
+            type: 'input',
+            name: 'school',
+            message: 'Enter the school for the intern'
+        }]).then((response) => {
+        team.push(new Intern(
+            response['id'],
+            response['name'],
+            response['email'],
+            response['github']));
+
+        prompt();
+    });
 }
 
 function build() {
@@ -35,8 +115,10 @@ function prompt() {
             addEngineer();
         } else if (response['role'] === 'Intern') {
             addIntern();
-        } else {
+        } else if (response['role'] === 'Generate Team Profiles') {
             build();
+        } else {
+            prompt();
         }
     });
 }
